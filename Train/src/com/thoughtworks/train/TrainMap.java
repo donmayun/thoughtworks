@@ -78,13 +78,17 @@ public interface TrainMap {
 
 	public void querstion6(Town town, int maxLength, String route);
 
-	public void querstion7(Town starttown,Town endtown, int condition, String route);
+	public void querstion7(Town starttown, Town endtown, int condition,
+			String route);
 
-	public void querstion8(String end, String path, int maxLength);
+	public void querstion8(String end, String path, int cost);
 
 	public void querstion9(String end, String path, int maxLength);
 
-	public void querstion10(String end, String path, int maxLength);
+	public void querstion10(Town town, int condition, String route,
+			int lengthloop);
+
+	int getRouteLength();
 
 	int getRouteNum();
 

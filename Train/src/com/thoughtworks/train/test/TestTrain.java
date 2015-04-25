@@ -4,6 +4,7 @@
 package com.thoughtworks.train.test;
 
 import java.io.File;
+import java.util.Arrays;
 
 import org.junit.Test;
 
@@ -76,23 +77,49 @@ public class TestTrain {
 		trainMap.createMapFromFile(new File("train.txt"));
 		System.out.println(trainMap);
 
-		System.out
-				.println(trainMap.getDistanceOfRoute('A', 'E', 'B', 'C', 'D'));
+		System.out.println(trainMap.getDistanceOfRoute('C', 'E', 'B', 'C', 'D',
+				'C'));
 	}
 
 	/**
-	 * @description dfs获取路径
+	 * @description dfs遍历
 	 * @author don
 	 * @time 2015年4月25日 上午9:43:21
 	 */
 	@Test
-	public void getRouteByPoint() {
-//		creatTrainLine(2000);
-		 trainMap.createMapFromFile(new File("train.txt"));
-//		trainMap.querstion6(new Town('C'), 3, "C");
-		trainMap.querstion7(new Town('A'),new Town('C'), 3, "A");
+	public void question6() {
+		// creatTrainLine(2000);
+		trainMap.createMapFromFile(new File("train.txt"));
+		trainMap.querstion6(new Town('C'), 3, "C");
 		System.out.println(trainMap.getRouteNum());
 
 	}
 
+	@Test
+	public void question7() {
+		trainMap.createMapFromFile(new File("train.txt"));
+		// trainMap.querstion7(new Town('C'), new Town('C'), 3, "C");
+		trainMap.querstion7(new Town('A'), new Town('C'), 4, "A");
+		System.out.println(trainMap.getRouteNum());
+
+	}
+
+	@Test
+	public void question10() {
+		trainMap.createMapFromFile(new File("train.txt"));
+
+		trainMap.querstion10(new Town('C'), 30, "C", 0);
+		System.out.println(trainMap.getRouteNum());
+	}
+
+	@Test
+	public void question8() {
+		trainMap.createMapFromFile(new File("train.txt"));
+
+		trainMap.querstion8("C", "A", 0);
+		System.out.println(trainMap.getRouteLength());
+		// int length[] = trainMap.getLengthList();
+		// Arrays.sort(length);
+		// System.out.println(length[0]);
+	}
 }
