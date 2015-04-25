@@ -50,14 +50,6 @@ public interface TrainMap {
 	int townNum();
 
 	/**
-	 * @description 线路数量
-	 * @return int
-	 * @author don
-	 * @time 2015年4月23日 下午2:53:59
-	 */
-	int routeNum();
-
-	/**
 	 * @description 城镇扩容
 	 * @param incre
 	 * @return int[][] 新城镇图
@@ -83,4 +75,17 @@ public interface TrainMap {
 	 * @time 2015年4月24日 下午8:33:31
 	 */
 	int getDistanceOfRoute(char... town);
+
+	public void querstion6(Town town, int maxLength, String route);
+
+	public void querstion7(Town starttown,Town endtown, int condition, String route);
+
+	public void querstion8(String end, String path, int maxLength);
+
+	public void querstion9(String end, String path, int maxLength);
+
+	public void querstion10(String end, String path, int maxLength);
+
+	int getRouteNum();
+
 }

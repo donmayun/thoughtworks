@@ -43,7 +43,6 @@ public class TestTrain {
 			trainLine.setTo(town2);
 			// 生成线长
 			trainLine.setLength((int) (Math.random() * 20 + 1));
-			System.out.println(trainLine);
 			trainMap.add(trainLine);
 		}
 
@@ -56,22 +55,44 @@ public class TestTrain {
 	 */
 	@Test
 	public void transform() {
-		creatTrainLine(20);
+		// creatTrainLine(20);
+		trainMap.createMapFromFile(new File("train.txt"));
+		// trainMap.createMapFromStr(" AB5, BC4, CD8, DC8, DE6, AD5, CE2, EB3, AE7",
+		// ",");
 
 		// 打印矩阵
 		System.out.println(trainMap);
 		// 点数
 		System.out.println("townNum:" + trainMap.townNum());
-		// 线路数
-		System.out.println("routeNum:" + trainMap.routeNum());
 	}
 
+	/**
+	 * @description 计算给定路线的距离
+	 * @author don
+	 * @time 2015年4月25日 上午9:29:33
+	 */
 	@Test
 	public void countDistance() {
-		// creatTrainLine(20);
 		trainMap.createMapFromFile(new File("train.txt"));
 		System.out.println(trainMap);
 
-		System.out.println(trainMap.getDistanceOfRoute('A', 'E','B','C','D'));
+		System.out
+				.println(trainMap.getDistanceOfRoute('A', 'E', 'B', 'C', 'D'));
 	}
+
+	/**
+	 * @description dfs获取路径
+	 * @author don
+	 * @time 2015年4月25日 上午9:43:21
+	 */
+	@Test
+	public void getRouteByPoint() {
+//		creatTrainLine(2000);
+		 trainMap.createMapFromFile(new File("train.txt"));
+//		trainMap.querstion6(new Town('C'), 3, "C");
+		trainMap.querstion7(new Town('A'),new Town('C'), 3, "A");
+		System.out.println(trainMap.getRouteNum());
+
+	}
+
 }

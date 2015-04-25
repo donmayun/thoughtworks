@@ -2,9 +2,7 @@ package com.thoughtworks.train.impl;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.util.ArrayList;
 import java.util.LinkedList;
-import java.util.List;
 import java.util.Scanner;
 
 import com.thoughtworks.train.TrainMap;
@@ -22,13 +20,13 @@ public class TrainMapImpl implements TrainMap {
 	private int[][] townMap;// 城镇线路图 ( 方向：x->y )
 
 	private LinkedList<Town> towns;// 城镇列表
-	private List<TrainLine> routeList; // 输入的线路
+
+	private int routeNum;// dfs线路数
 
 	// 初始化
 	public TrainMapImpl() {
 		scale = 0;
 		towns = new LinkedList<Town>();
-		routeList = new ArrayList<TrainLine>();
 		townMap = new int[scale][scale];
 	}
 
@@ -37,7 +35,6 @@ public class TrainMapImpl implements TrainMap {
 
 		if (trainLine.isRightLine()) {
 			// 添加城镇线路
-			routeList.add(trainLine);
 			int fromIndex = addTown(trainLine.getFrom());
 			int toIndex = addTown(trainLine.getTo());
 
@@ -108,11 +105,6 @@ public class TrainMapImpl implements TrainMap {
 	}
 
 	@Override
-	public int routeNum() {
-		return routeList.size();
-	}
-
-	@Override
 	public String toString() {
 		StringBuffer mapTOstr = new StringBuffer();
 		if (townNum() == 0) {
@@ -174,6 +166,79 @@ public class TrainMapImpl implements TrainMap {
 			distance += lineDistance;
 		}
 		return distance;
+	}
+
+	@Override
+	public void querstion6(Town town, int condition, String route) {
+		// 不满足
+		if (route.length() - 1 > condition) {
+			return;
+		}
+
+		if (route.length() > 1 && route.endsWith(town.toString())) {
+			routeNum++;
+			// System.out.println(route + ", " + route.length());
+		}
+
+		// 获取下一个起点
+		Town nextTown = new Town(route.charAt(route.length() - 1));
+		int lastNodeIndex = towns.indexOf(nextTown);
+
+		for (int i = 0; i < towns.size(); i++) {
+			// 有路
+			if (townMap[lastNodeIndex][i] > 0) {
+				querstion6(town, condition, route + towns.get(i).toString());
+			}
+		}
+
+	}
+
+	@Override
+	public void querstion7(Town starttown,Town endtown, int condition, String route) {
+		// 不满足
+		if (route.length() - 1 > condition) {
+			return;
+		}
+
+		if ((route.length() - 1) == condition
+				&& route.endsWith(endtown.toString())) {
+			routeNum++;
+			System.out.println(route + ", " + route.length());
+		}
+
+		// 获取下一个起点
+		Town nextTown = new Town(route.charAt(route.length() - 1));
+		int start = towns.indexOf(starttown);
+		
+		for (int i = 0; i < towns.size(); i++) {
+			// 有路
+			if (townMap[start][i] > 0) {
+				querstion7(nextTown, endtown, condition, route + towns.get(i).toString());
+			}
+		}
+	}
+
+	@Override
+	public void querstion8(String end, String path, int maxLength) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void querstion9(String end, String path, int maxLength) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void querstion10(String end, String path, int maxLength) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public int getRouteNum() {
+		return routeNum;
 	}
 
 }

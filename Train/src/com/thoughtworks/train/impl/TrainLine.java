@@ -1,7 +1,5 @@
 package com.thoughtworks.train.impl;
 
-import java.io.File;
-
 /**
  * @description A->B的一条线路
  *
@@ -39,6 +37,7 @@ public class TrainLine {
 
 	public TrainLine createByString(String str) {
 		try {
+			str = str.trim();
 			this.from = new Town(str.charAt(0));
 			this.to = new Town(str.charAt(1));
 
