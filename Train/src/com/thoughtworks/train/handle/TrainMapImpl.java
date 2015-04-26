@@ -152,7 +152,7 @@ public class TrainMapImpl implements TrainMap {
 	}
 
 	@Override
-	public int getDistanceOfRoute(char... town) {
+	public String getDistanceOfRoute(char... town) {
 		int distance = 0;
 		int lineDistance = 0;
 		Town from;
@@ -163,11 +163,11 @@ public class TrainMapImpl implements TrainMap {
 			lineDistance = getDistanceOfLine(from, to);
 			if (lineDistance == 0) {
 				// 这条路不通
-				return 0;
+				return "NO SUCH ROUTE";
 			}
 			distance += lineDistance;
 		}
-		return distance;
+		return "" + distance;
 	}
 
 	@Override
@@ -235,18 +235,18 @@ public class TrainMapImpl implements TrainMap {
 		// 获取当前应该遍历的行
 		Town nextTown = new Town(route.charAt(loopRouteLength - 1));
 		int start = towns.indexOf(nextTown);
-		
 
-		//防止死循环
-		//出现循环路线 回溯
-		if(route.length()>3&&route.charAt(loopRouteLength-1)==route.charAt(loopRouteLength-3)){
+		// 防止死循环
+		// 出现循环路线 回溯
+		if (route.length() > 3
+				&& route.charAt(loopRouteLength - 1) == route
+						.charAt(loopRouteLength - 3)) {
 			return;
 		}
-		
+
 		for (int i = 0; i < towns.size(); i++) {
 			int length = townMap[start][i];
-			
-			
+
 			if (length > 0) {
 				querstion8(town, lengthloop + length, route
 						+ towns.get(i).toString());
@@ -264,8 +264,8 @@ public class TrainMapImpl implements TrainMap {
 
 		if (route.length() > 1 && route.endsWith(town.toString())) {
 			routeNum++;
-			System.out.println(route + ", " + route.length()
-					+ "   loopLength: " + lengthloop);
+			// System.out.println(route + ", " + route.length()
+			// + "   loopLength: " + lengthloop);
 		}
 
 		// 获取当前应该遍历的行
@@ -298,4 +298,8 @@ public class TrainMapImpl implements TrainMap {
 		return minlength;
 	}
 
+	@Override
+	public void setRouteNum(int routeNum) {
+		this.routeNum = routeNum;
+	}
 }

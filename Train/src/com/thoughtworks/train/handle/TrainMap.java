@@ -67,11 +67,11 @@ public interface TrainMap {
 	/**
 	 * @description 计算特定路线长度
 	 * @param town
-	 * @return int
+	 * @return String
 	 * @author don
 	 * @time 2015年4月24日 下午8:33:31
 	 */
-	int getDistanceOfRoute(char... town);
+	String getDistanceOfRoute(char... town);
 
 	public void querstion6(Town town, int maxLength, String route);
 
@@ -88,5 +88,7 @@ public interface TrainMap {
 	int getRouteNum();
 
 	int getMinLength();
+
+	void setRouteNum(int routeNum);
 
 }
