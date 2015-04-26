@@ -73,6 +73,14 @@ public interface TrainMap {
 	 */
 	String getDistanceOfRoute(char... town);
 
+	int getRouteLength();
+
+	int getRouteNum();
+
+	int getMinLength();
+
+	void setRouteNum(int routeNum);
+
 	public void querstion6(Town town, int maxLength, String route);
 
 	public void querstion7(Town starttown, Town endtown, int condition,
@@ -82,13 +90,5 @@ public interface TrainMap {
 
 	public void querstion10(Town town, int condition, String route,
 			int lengthloop);
-
-	int getRouteLength();
-
-	int getRouteNum();
-
-	int getMinLength();
-
-	void setRouteNum(int routeNum);
 
 }

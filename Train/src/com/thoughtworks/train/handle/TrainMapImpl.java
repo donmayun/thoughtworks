@@ -142,6 +142,26 @@ public class TrainMapImpl implements TrainMap {
 	}
 
 	@Override
+	public int getRouteLength() {
+		return routeLength;
+	}
+
+	@Override
+	public int getRouteNum() {
+		return routeNum;
+	}
+
+	@Override
+	public int getMinLength() {
+		return minlength;
+	}
+
+	@Override
+	public void setRouteNum(int routeNum) {
+		this.routeNum = routeNum;
+	}
+
+	@Override
 	public int getDistanceOfLine(Town from, Town to) {
 		int first = towns.indexOf(from);
 		int second = towns.indexOf(to);
@@ -283,23 +303,4 @@ public class TrainMapImpl implements TrainMap {
 
 	}
 
-	@Override
-	public int getRouteLength() {
-		return routeLength;
-	}
-
-	@Override
-	public int getRouteNum() {
-		return routeNum;
-	}
-
-	@Override
-	public int getMinLength() {
-		return minlength;
-	}
-
-	@Override
-	public void setRouteNum(int routeNum) {
-		this.routeNum = routeNum;
-	}
 }
