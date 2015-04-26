@@ -1,6 +1,3 @@
-# thoughtworks
-tw的homework
-
 Problem one: Trains
 
 The local commuter railroad services a number of towns in Kiwiland.  Because of monetary concerns, all of the tracks are 'one-way.'  That is, a route from Kaitaia to Invercargill does not imply the existence of a route from Invercargill to Kaitaia.  In fact, even if both of these routes do happen to exist, they are distinct and are not necessarily the same distance!
@@ -37,3 +34,4 @@ Output #7: 3
 Output #8: 9
 Output #9: 9
 Output #10: 7
+
