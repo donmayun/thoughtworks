@@ -4,14 +4,13 @@
 package com.thoughtworks.train.test;
 
 import java.io.File;
-import java.util.Arrays;
 
 import org.junit.Test;
 
-import com.thoughtworks.train.TrainMap;
-import com.thoughtworks.train.impl.Town;
-import com.thoughtworks.train.impl.TrainLine;
-import com.thoughtworks.train.impl.TrainMapImpl;
+import com.thoughtworks.train.handle.Town;
+import com.thoughtworks.train.handle.TrainLine;
+import com.thoughtworks.train.handle.TrainMap;
+import com.thoughtworks.train.handle.TrainMapImpl;
 
 /**
  * @description
@@ -116,10 +115,15 @@ public class TestTrain {
 	public void question8() {
 		trainMap.createMapFromFile(new File("train.txt"));
 
-		trainMap.querstion8("C", "A", 0);
-		System.out.println(trainMap.getRouteLength());
-		// int length[] = trainMap.getLengthList();
-		// Arrays.sort(length);
-		// System.out.println(length[0]);
+		trainMap.querstion8(new Town('C'), 0, "A");
+		System.out.println(trainMap.getMinLength());
+	}
+
+	@Test
+	public void question9() {
+		trainMap.createMapFromFile(new File("train.txt"));
+
+		trainMap.querstion8(new Town('E'), 0, "C");
+		System.out.println(trainMap.getMinLength());
 	}
 }

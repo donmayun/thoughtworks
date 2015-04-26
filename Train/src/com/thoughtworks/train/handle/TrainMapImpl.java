@@ -1,13 +1,9 @@
-package com.thoughtworks.train.impl;
+package com.thoughtworks.train.handle;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.util.ArrayList;
 import java.util.LinkedList;
-import java.util.List;
 import java.util.Scanner;
-
-import com.thoughtworks.train.TrainMap;
 
 /**
  * @description 城镇线路图
@@ -26,16 +22,14 @@ public class TrainMapImpl implements TrainMap {
 	private int routeNum;// dfs线路数
 
 	private int routeLength;// 路径长度
-	private List<Integer> lengthList;
-
-	private String bestPath;
+	private int minlength;// 最短路径
 
 	// 初始化
 	public TrainMapImpl() {
 		scale = 0;
 		towns = new LinkedList<Town>();
 		townMap = new int[scale][scale];
-		lengthList = new ArrayList<Integer>();
+		minlength = Integer.MAX_VALUE;
 	}
 
 	@Override
@@ -178,7 +172,7 @@ public class TrainMapImpl implements TrainMap {
 
 	@Override
 	public void querstion6(Town town, int condition, String route) {
-		// 不满足
+		// 回溯
 		if (route.length() - 1 > condition) {
 			return;
 		}
@@ -204,7 +198,7 @@ public class TrainMapImpl implements TrainMap {
 	@Override
 	public void querstion7(Town starttown, Town endtown, int condition,
 			String route) {
-		// 不满足
+		// 回溯
 		if (route.length() - 1 > condition) {
 			return;
 		}
@@ -215,7 +209,7 @@ public class TrainMapImpl implements TrainMap {
 			// System.out.println(route + ", " + route.length());
 		}
 
-		// 获取下一个起点
+		// 获取当前应该遍历的行
 		Town nextTown = new Town(route.charAt(route.length() - 1));
 		int start = towns.indexOf(nextTown);
 
@@ -229,36 +223,41 @@ public class TrainMapImpl implements TrainMap {
 	}
 
 	@Override
-	public void querstion8(String end, String path, int cost) {
-		if (path.endsWith(end) && cost < routeLength && cost > 0) {
-			bestPath = path;
-			routeLength = cost;
+	public void querstion8(Town town, int lengthloop, String route) {
+		int loopRouteLength = route.length();
+		// 回溯
+		if (route.endsWith(town.toString()) && lengthloop > 0) {
+			if (lengthloop < minlength) {
+				minlength = lengthloop;
+			}
 			return;
 		}
-		char lastChar = path.charAt(path.length() - 1);
-		int lastNodeIndex = lastChar - 'A';
+		// 获取当前应该遍历的行
+		Town nextTown = new Town(route.charAt(loopRouteLength - 1));
+		int start = towns.indexOf(nextTown);
+		
 
-		for (int i = 0; i < townMap[lastNodeIndex].length; i++) {
-			char newChar = (char) (i + 'A');
-			int newCost = townMap[lastNodeIndex][i];
-			if (newCost > 0) {
-				if (path.indexOf(newChar) > 0)
-					continue;
-				querstion8(end, path + newChar, cost + newCost);
+		//防止死循环
+		//出现循环路线 回溯
+		if(route.length()>3&&route.charAt(loopRouteLength-1)==route.charAt(loopRouteLength-3)){
+			return;
+		}
+		
+		for (int i = 0; i < towns.size(); i++) {
+			int length = townMap[start][i];
+			
+			
+			if (length > 0) {
+				querstion8(town, lengthloop + length, route
+						+ towns.get(i).toString());
 			}
 		}
 	}
 
 	@Override
-	public void querstion9(String end, String path, int maxLength) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
 	public void querstion10(Town town, int condition, String route,
 			int lengthloop) {
-		// 不满足
+		// 回溯
 		if (lengthloop >= condition) {
 			return;
 		}
@@ -278,22 +277,25 @@ public class TrainMapImpl implements TrainMap {
 			int length = townMap[start][i];
 			if (length > 0) {
 				querstion10(town, condition, route + towns.get(i).toString(),
-						lengthloop + length);//坑爹！！！
+						lengthloop + length);// 坑爹！！！
 			}
 		}
 
 	}
 
+	@Override
 	public int getRouteLength() {
 		return routeLength;
 	}
 
+	@Override
 	public int getRouteNum() {
 		return routeNum;
 	}
 
-	public void setRouteNum(int routeNum) {
-		this.routeNum = routeNum;
+	@Override
+	public int getMinLength() {
+		return minlength;
 	}
 
 }

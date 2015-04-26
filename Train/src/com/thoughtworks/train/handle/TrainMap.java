@@ -1,9 +1,6 @@
-package com.thoughtworks.train;
+package com.thoughtworks.train.handle;
 
 import java.io.File;
-
-import com.thoughtworks.train.impl.Town;
-import com.thoughtworks.train.impl.TrainLine;
 
 /**
  * @description 城镇线路图
@@ -81,9 +78,7 @@ public interface TrainMap {
 	public void querstion7(Town starttown, Town endtown, int condition,
 			String route);
 
-	public void querstion8(String end, String path, int cost);
-
-	public void querstion9(String end, String path, int maxLength);
+	public void querstion8(Town town, int lengthloop, String route);
 
 	public void querstion10(Town town, int condition, String route,
 			int lengthloop);
@@ -91,5 +86,7 @@ public interface TrainMap {
 	int getRouteLength();
 
 	int getRouteNum();
+
+	int getMinLength();
 
 }

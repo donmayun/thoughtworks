@@ -1,4 +1,4 @@
-package com.thoughtworks.train.impl;
+package com.thoughtworks.train.handle;
 
 /**
  * @description A->B的一条线路
